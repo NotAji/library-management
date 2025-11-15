@@ -1,2 +1,2 @@
 # library-management
-tbd
+library management system to manage burrowed and returned books
