@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import bcrypt from 'bcrypt';
 
 const userSchema = new mongoose.Schema({
     name: {
@@ -13,10 +14,11 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    borrowedBooks: {
+    borrowedBooks: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Book"
-    }
+        ref: "Book",
+        default: []
+    }]
 }, { timestamps: true });
 
 export default mongoose.model("User", userSchema);

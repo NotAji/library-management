@@ -1,4 +1,6 @@
 import express from "express"
+import { userRegister, userLogin } from "../controllers/userController.js";
+
 const router = express.Router();
 
 router.get('/', (req, res) => {
@@ -12,5 +14,9 @@ router.get('/borrowed', (req, res) => {
 router.get('/profile', (req, res) => {
     res.send("user profile")
 })
+
+router.post('/register', userRegister)
+
+router.post('/login', userLogin)
 
 export default router;
