@@ -1,6 +1,7 @@
 import User from '../models/userModel.js'; 
 import Book from '../models/bookModel.js';
 import bcrypt from 'bcrypt'
+import generateToken from '../utils/generateToken.js';
 
 export const userRegister = async (req, res) => {
     const { name, email, password } = req.body;
@@ -17,7 +18,9 @@ export const userRegister = async (req, res) => {
             password: hashed,
         });
 
-        res.status(201).json({ message: "User registered", user});
+        const token = generateToken(user._id, "user");
+
+        res.status(201).json({ message: "User registered", user, token});
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
@@ -35,7 +38,7 @@ export const userLogin = async (req, res) => {
 
         res.json({ message: "Login successful", user})
     } catch (error) {
-        
+        res.status(404).json({ error: error.message})
     }
 }
 

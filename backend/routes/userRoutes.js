@@ -1,5 +1,6 @@
 import express from "express"
 import { userRegister, userLogin } from "../controllers/userController.js";
+import { protect } from "../middleware/authMIddlewate.js";
 
 const router = express.Router();
 
@@ -17,6 +18,6 @@ router.get('/profile', (req, res) => {
 
 router.post('/register', userRegister)
 
-router.post('/login', userLogin)
+router.post('/login', protect, userLogin)
 
 export default router;
