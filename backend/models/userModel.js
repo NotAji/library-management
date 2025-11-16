@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-import bcrypt from 'bcrypt';
 
 const userSchema = new mongoose.Schema({
     name: {
@@ -18,7 +17,11 @@ const userSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "Book",
         default: []
-    }]
+    }],
+    role: {
+        type: String,
+        default: "user"
+    }
 }, { timestamps: true });
 
 export default mongoose.model("User", userSchema);
