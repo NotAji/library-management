@@ -4,20 +4,8 @@ import { protect } from "../middleware/authMIddlewate.js";
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
-    res.send("user home route")
-})
+router.post('/register', userRegister);
 
-router.get('/borrowed', (req, res) => {
-    res.send("user borrowed books")
-})
-
-router.get('/profile', (req, res) => {
-    res.send("user profile")
-})
-
-router.post('/register', userRegister)
-
-router.post('/login', protect, userLogin)
+router.post('/login', userLogin);
 
 export default router;
