@@ -14,7 +14,7 @@ const userSchema = new mongoose.Schema({
         required: true
     },
     borrowedBooks: [{
-        type: mongoose.Schema.Types.ObjectId,
+        type: String,
         ref: "Book",
         default: []
     }],

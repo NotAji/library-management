@@ -23,7 +23,7 @@ export const protect = async (req, res, next) => {
         }
     }
 
-    return res.status(401).json({ message: "No token provided" });
+    return res.status(401).json({ message: "Not Authorized" });
 };
 
 export const adminOnly = async (req, res, next) => {

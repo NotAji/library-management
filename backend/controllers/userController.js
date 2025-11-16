@@ -21,7 +21,7 @@ export const userRegister = async (req, res) => {
             role
         });
 
-        const token = generateToken(user._id, "user");
+        const token = generateToken(user._id, role);
 
         res.status(201).json({ message: "User registered", user, token});
     } catch (error) {
@@ -48,23 +48,22 @@ export const userLogin = async (req, res) => {
 }
 
 export const borrowBook = async (req, res) => {
-    const { bookId } = req.body;
-
     try {
-        const user = await User.findOne(email);
+        const user = await User.findOne(User.email);
         if(!user) return res.status(400).json({ message: "User not found"});
         
-        if (user.borrowedBooks.length >= 3) {
+        if (user.borrowedBooks.length >= 5) {
             return res.status(400).json({ message: "Borrow limit reached (3 books)" });
         }
-        const book = await Book.findById(bookId);
+        const book = await Book.findOne({ bookId: req.params.id });
         if(!book) return res.status(404).json({ message: "Book not found" });
         if(book.isBorrowed) {
             return res.status(400).json({ message: "Book is already borrowed"});
         }
 
         book.isBorrowed = true;
-        user.borrowedBooks.push(book._id);
+        user.borrowedBooks.push(book.title);
+        book.borrowedBy = user.name;
 
         await book.save();
         await user.save();

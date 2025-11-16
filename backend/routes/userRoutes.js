@@ -9,7 +9,7 @@ router.post('/register', userRegister);
 
 router.post('/login', userLogin);
 
-router.post('/borrowBook', borrowBook)
+router.post('/borrowBook/:id', borrowBook)
 
 router.get('/getBooks', getBooks)
 
