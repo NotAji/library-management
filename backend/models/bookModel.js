@@ -1,8 +1,10 @@
 import mongoose from "mongoose";
+import Counter from './counter.js'
 
 const bookSchema = new mongoose.Schema({
     bookId: {
         type: Number,
+        required: true,
         unique: true
     },
     title: {
@@ -22,7 +24,7 @@ const bookSchema = new mongoose.Schema({
 
 bookSchema.pre("save", async function(next) {
     if(!this.isNew) return next();
-    const counter = await counter.findByIdAndUpdate(
+    const counter = await Counter.findByIdAndUpdate(
         { _id: "bookId" },
         { $inc: { seq:1 } },
         { new: true, upsert: true }

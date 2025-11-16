@@ -3,6 +3,7 @@ import dotenv from 'dotenv'
 import userRoutes from './routes/userRoutes.js'
 import adminRoutes from './routes/adminRoutes.js'
 import connectDB from './config/database.js'
+import bookRoutes from './routes/bookRoutes.js'
 
 dotenv.config();
 connectDB();
@@ -12,7 +13,7 @@ const PORT = process.env.PORT;
 
 app.use(express.json());
 app.use("/api/user", userRoutes);
-app.use("/api/admin", adminRoutes);
+app.use("/api/books", bookRoutes);
 
 
 app.listen(PORT, () => {

@@ -26,7 +26,7 @@ export const protect = async (req, res, next) => {
     return res.status(401).json({ message: "No token provided" });
 };
 
-export const adminOnly = async (req, res) => {
+export const adminOnly = async (req, res, next) => {
     if (req.user.role !== "admin") {
         return res.status(403).json({ message: "Admin only" });
     }
