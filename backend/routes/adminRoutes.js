@@ -1,16 +1,17 @@
 import express from 'express';
-import { getBook, getBooks, createBook, updateBook, deleteBook } from '../controllers/adminController.js';
+import { getBook, getBooks, createBook, updateBook, deleteBook } from '../controllers/bookController.js';
+import { adminOnly } from '../middleware/authMIddlewate.js';
 
 const router = express.Router();
 
-router.get('/getBooks', getBooks);
+router.get('/getBook', adminOnly, getBook);
 
-router.get('/getBook', getBook);
+router.get('/getBooks', adminOnly, getBooks);
 
-router.post('/createBook', createBook);
+router.post('/createBook', adminOnly, createBook);
 
-router.put('/updateBook/id', updateBook);
+router.put('/updateBook/id', adminOnly, updateBook);
 
-router.delete('/deleteBook/id', deleteBook);
+router.delete('/deleteBook/id', adminOnly, deleteBook);
 
 export default router;
