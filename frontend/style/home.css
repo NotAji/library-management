@@ -1,3 +1,11 @@
+@font-face {
+    font-family: 'Poppins';
+    src: url('/frontend/assets/fonts/poppins/Poppins-Bold.ttf'),
+         url('/frontend/assets/fonts/poppins/Poppins-Black.ttf');
+    font-weight: 400;
+    font-style: normal;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -6,46 +14,66 @@
 
 html , body {
     height: 100%;
+    font-family: 'Poppins', sans-serif;
 }
 
-header {
-    background: #c7b198;
-    display: flex;
-    padding: 20px;
+.sidebar {
+    width: 220px;
+    background-color: #c7b198;
+    color: white;
+    height: 100vh;
+    padding: 1rem;
+    position: fixed;
 }
 
-header nav {
-    display: flex;
-    justify-content: center;
-    gap: 50px;
+.sidebar h2 {
+    margin-top: 3rem;
+    font-size: 2.5rem;
     text-align: center;
-    align-items: center;
-    margin: auto;
-    text-decoration: none;
+}
+
+.sidebar ul {
     list-style: none;
+    padding: 0;
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-header nav a{
-    background-color: aliceblue;
+.sidebar ul li {
+    margin: 2rem 0;
+    font-weight: bold;
+}
+
+.sidebar ul li a {
+    color: white;
     text-decoration: none;
-    color: black;
-    padding: 10px 15px;
-    border-radius: 10px;
-}
-
-header nav a:hover {
-    background-color: rgb(207, 148, 99);
-    transition: 0.5s;
-}
-
-header button {
-    padding: 10px;
-    border-radius: 10px;
+    display: block;
+    font-size: 1.5rem;
+    padding: 0.5rem 1rem;
     border: none;
+    background: none;
+    text-align: left;
+    width: 100%;
+    cursor: pointer;
+    border-radius: 10px;
 }
 
-header button:hover {
-    cursor: pointer;
-    background-color: rgb(207, 148, 99);
-    transition: 0.5s;
+.sidebar button {
+    font-size: 1.5rem;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 10px;
+    font-family: 'Poppins';
+    background: none;
+    color: white;
 }
+
+.sidebar ul li a:hover,
+.sidebar ul li button:hover {
+    background-color: rgba(121, 77, 52, 0.767);
+    border-radius: 10px;
+    transition: 0.3s;
+}
+
