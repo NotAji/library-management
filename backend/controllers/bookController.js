@@ -1,4 +1,5 @@
 import Book from '../models/bookModel.js'
+import User from '../models/userModel.js'
 
 export const getBooks = async (req, res) => {
     try {
@@ -19,11 +20,31 @@ export const getBook = async (req, res) => {
     }
 }
 
+export const getUserBooks = async (req, res) => {
+    try {
+        const user = await User.findById(req.user.id)
+            .populate('borrowedBooks.bookId');
+
+        if(!user) return res.status(404).json({ message: "Books not found"});
+
+        const books = user.borrowedBooks.map(item => ({
+            title: item.bookId.title,
+            author: item.bookId.author,
+            dateBorrowed: item.dateBorrowed
+        }));
+
+        res.json({ borrowedBooks: books })
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+}
+
 export const createBook = async (req, res) => {
-    const { title } = req.body;
+    const { title, author } = req.body;
 
     try {
         if (!title) return res.status(400).json({ message: "title required"});
+        if (!author) return res.status(400).json({ message: "author required"});
 
         const lastBook = await Book.findOne().sort({ bookId: -1});
         const bookId = lastBook ? lastBook.bookId +1 : 1;
@@ -31,6 +52,7 @@ export const createBook = async (req, res) => {
         const newBook = await Book.create({
             bookId,
             title,
+            author,
         });
 
         res.status(201).json({ message: "Book Created", book: newBook });
@@ -40,7 +62,7 @@ export const createBook = async (req, res) => {
 }
 
 export const updateBook = async (req, res) => {
-    const { title } = req.body;
+    const { title, author } = req.body;
 
     try {
         const book = await Book.findOne({ bookId: req.params.id });
@@ -48,6 +70,7 @@ export const updateBook = async (req, res) => {
         if(!book) return res.status(404).json({ message: "Book not found" });
 
         if (title) book.title = title;
+        if (author) book.author = author;
 
         await book.save();
         res.json({ message: "Book updated", book: book});

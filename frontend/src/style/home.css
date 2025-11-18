@@ -33,6 +33,10 @@ html , body {
     color: rgba(121, 77, 52, 0.767);
 }
 
+.sidebar h2:hover {
+    cursor: pointer;
+}
+
 .sidebar ul {
     list-style: none;
     padding: 0;
@@ -72,13 +76,52 @@ html , body {
 }
 
 .sidebar ul li a:hover,
-.sidebar ul li button:hover {
+#logout-btn:hover {
     background-color: rgba(121, 77, 52, 0.767);
     border-radius: 10px;
     transition: 0.3s;
+    cursor: pointer;
 }
 
-.container {
-    background-color: rgb(255, 237, 213);
-    height: 100%;
+.book-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, auto);
+    gap: 50px;
+    position: relative;
+    top: 10%;
+    padding: 20px;
+    margin-left: 300px;
+}
+
+.book-card {
+    width: 300px;
+    padding: 18px;
+    border-radius: 10px;
+    background: #c7b198;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    border-left: 6px solid rgba(121, 77, 52, 0.767);
+    transition: 0.25s ease;
+}
+
+.book-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+}
+
+.book-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.book-author {
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.book-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    font-size: 0.95rem;
 }

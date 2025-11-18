@@ -11,14 +11,22 @@ const bookSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    author: {
+        type: String,
+        required: true
+    },
     isBorrowed: {
         type: Boolean,
         default: false
     },
     borrowedBy: {
-        type: String,
+        type: [String],
         ref: "User",
         default: []
+    },
+    borrowedAt: {
+        type: Date,
+        default: null
     }
 }, { timestamps: true });
 

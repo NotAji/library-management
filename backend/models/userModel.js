@@ -13,11 +13,12 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    borrowedBooks: [{
-        type: String,
-        ref: "Book",
-        default: []
-    }],
+    borrowedBooks: [
+    {
+        bookId: { type: mongoose.Schema.Types.ObjectId, ref: "Book" },
+        dateBorrowed: { type: Date, default: Date.now }
+    }
+    ],
     role: {
         type: String,
         default: "user"
