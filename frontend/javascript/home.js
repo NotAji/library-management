@@ -52,6 +52,8 @@ function displayBorrowedBooks(books) {
   }
 
   container.style.display = "grid";
+  container.style.justifyContent = "center";
+
   container.innerHTML = books.map(book => `
     <div class="book-card">
       <h3 class="book-title">${book.title}</h3>
@@ -61,19 +63,32 @@ function displayBorrowedBooks(books) {
   `).join("");
 
   const numBooks = books.length;
+  const columns = Math.min(numBooks, 3);
+  container.style.gridTemplateColumns = `repeat(${columns}, auto)`;
+  container.style.gap = "20px"; // static gap works now
 
-  // Dynamically calculate columns and card width
-  let columns = Math.min(numBooks, 3);        // max 3 columns
-  let cardWidth = Math.max(150, 400 - numBooks * 30); // shrink as more books added
+  // Dynamic card sizing
+  let cardWidth, padding, fontSize;
+  if (numBooks === 1) {
+    cardWidth = 400;
+    padding = 30;
+    fontSize = "1.8rem";
+  } else if (numBooks === 2) {
+    cardWidth = 350;
+    padding = 25;
+    fontSize = "1.6rem";
+  } else if (numBooks === 3) {
+    cardWidth = 300;
+    padding = 18;
+    fontSize = "1.2rem";
+  }
 
-  container.style.gridTemplateColumns = `repeat(${columns}, ${cardWidth}px)`;
-
-  // Optional: adjust card widths
   document.querySelectorAll(".book-card").forEach(card => {
     card.style.width = `${cardWidth}px`;
+    card.style.padding = `${padding}px`;
+    card.querySelectorAll("h3, p").forEach(el => el.style.fontSize = fontSize);
   });
 }
-
 
 
 document.addEventListener("DOMContentLoaded", loadBorrowedBooks);
