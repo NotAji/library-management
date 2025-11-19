@@ -1,24 +1,36 @@
 const API_URL = "http://localhost:5000/api"
 
 async function loadBorrowedBooks() {
-    try {
-        const token = localStorage.getItem("token");
-        if (!token) return alert("User not logged in");
+    console.log("🚀 loadBorrowedBooks() triggered");
+  const token = localStorage.getItem("token");
+   console.log("Token:", token);
+  if (!token) {
+    window.location.href = "login.html";
+    return;
+  }
 
-        const res = await fetch("/user/userBooks", {
-            headers: {
-                "Authorization": `Bearer ${token}`
-            }
-        });
+  try {
+    const res = await fetch(`${API_URL}/user/userBooks`, {
+      headers: { "Authorization": `Bearer ${token}` }
+    });
 
-        const data = await res.json();
-        displayBooks(data.borrowedBooks)
-    } catch (error) {
-        console.error("Error fetching books: ", error);
+    console.log("Status:", res.status);
+
+    const data = await res.json();
+
+    console.log("API Response:", data);
+
+    if (!data.borrowedBooks) {
+      document.getElementById("borrowedList").innerHTML = "<p>No borrowed books.</p>";
+      return;
     }
-}
 
-window.onload = loadBorrowedBooks;
+    displayBorrowedBooks(data.borrowedBooks);
+
+  } catch (err) {
+    console.error(err);
+  }
+}
 
 window.onload = () => {
   const token = localStorage.getItem("token");
@@ -28,20 +40,40 @@ window.onload = () => {
   }
 };
 
-function displayBooks() {
-    const grid = document.getElementById("bookGrid");
-    grid.innerHTML = "";
+function displayBorrowedBooks(books) {
+  const container = document.getElementById("borrowedList");
 
-    books.forEach(book => {
-        const card = document.createElement("div");
-        card.classList.add("book-card");
+  if (!books || books.length === 0) {
+    container.style.display = "flex";
+    container.style.justifyContent = "center";
+    container.style.alignItems = "center";
+    container.innerHTML = `<p class="noBorrowed">No borrowed books.</p>`;
+    return;
+  }
 
-        card.innerHTML = `
-            <h3>${book.title}</h3>
-            <p>Author: ${book.author}</P>
-            <P>Date Borrowed: ${new Date(book.dateBorrowed).toLocaleDateString()}</p>
-        `;
+  container.style.display = "grid";
+  container.innerHTML = books.map(book => `
+    <div class="book-card">
+      <h3 class="book-title">${book.title}</h3>
+      <p class="book-author">Author: ${book.author}</p>
+      <p class="book-info">Date Borrowed: ${new Date(book.dateBorrowed).toLocaleDateString()}</p>
+    </div>
+  `).join("");
 
-        grid.appendChild(card);
-    });
+  const numBooks = books.length;
+
+  // Dynamically calculate columns and card width
+  let columns = Math.min(numBooks, 3);        // max 3 columns
+  let cardWidth = Math.max(150, 400 - numBooks * 30); // shrink as more books added
+
+  container.style.gridTemplateColumns = `repeat(${columns}, ${cardWidth}px)`;
+
+  // Optional: adjust card widths
+  document.querySelectorAll(".book-card").forEach(card => {
+    card.style.width = `${cardWidth}px`;
+  });
 }
+
+
+
+document.addEventListener("DOMContentLoaded", loadBorrowedBooks);

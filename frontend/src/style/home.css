@@ -84,24 +84,21 @@ html , body {
 }
 
 .book-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(2, auto);
-    gap: 50px;
-    position: relative;
-    top: 10%;
-    padding: 20px;
-    margin-left: 300px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  padding: 20px;
+  justify-items: center;
 }
 
 .book-card {
     width: 300px;
-    padding: 18px;
-    border-radius: 10px;
-    background: #c7b198;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    border-left: 6px solid rgba(121, 77, 52, 0.767);
-    transition: 0.25s ease;
+    max-width: 350px;
+  background: #c7b198;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  border-left: 6px solid rgba(121, 77, 52, 0.767);
+  padding: 20px;
+  transition: all 0.3s ease;
 }
 
 .book-card:hover {
@@ -124,4 +121,30 @@ html , body {
     justify-content: space-between;
     margin-bottom: 12px;
     font-size: 0.95rem;
+}
+
+.borrow-container {
+    display: grid;
+    justify-content: center; /* horizontal center of the grid */
+    align-content: center;   /* vertical center */
+    row-gap: 50px;
+    column-gap: 50px;;
+    min-height: 95vh;        /* ensures vertical centering */
+    padding: 20px;
+    padding-left: 100px;
+}
+.borrow-container .no-books {
+    position:relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;    
+    min-height: 300px;     
+}
+.noBorrowed {
+    position: absolute;
+    font-size: 4rem;
+    color: #555;
+    top: 40%;
+    left: 40%;
+    color: rgba(121, 77, 52, 0.767);
 }
