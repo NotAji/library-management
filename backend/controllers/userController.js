@@ -74,6 +74,7 @@ export const borrowBook = async (req, res) => {
       bookId: book._id,
       dateBorrowed: new Date(),
     });
+    book.borrowedAt = new Date();
     book.borrowedBy = user.name;
 
     await book.save();

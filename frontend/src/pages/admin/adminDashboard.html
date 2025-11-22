@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/frontend/src/style/admin.css" />
     <title>Document</title>
   </head>
   <body>
@@ -12,19 +13,44 @@
       <div class="contents">
         <div class="data1">
           <h3>Total Users</h3>
-          <p>2</p>
+          <p id="dataUsers"></p>
         </div>
 
         <div class="data2">
           <h3>Total Books</h3>
-          <p>52</p>
+          <p id="dataBooks"></p>
         </div>
 
         <div class="data3">
           <h3>Borrowed Books</h3>
-          <p>22</p>
+          <p id="dataBorrowed"></p>
         </div>
       </div>
+    </div>
+
+    <div class="tableContainer">
+      <table id="userTable">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Borrowed Books</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+
+      <table id="bookTable">
+        <thead>
+          <tr>
+            <th>Book</th>
+            <th>Borrowed By</th>
+            <th>Date Borrowed</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
     </div>
 
     <script

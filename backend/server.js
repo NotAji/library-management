@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import userRoutes from './routes/userRoutes.js';
 import connectDB from './config/database.js';
 import bookRoutes from './routes/bookRoutes.js';
+import adminRoutes from './routes/adminRoutes.js';
 import path from 'path';
 import cors from 'cors';
 import { fileURLToPath } from 'url';
@@ -22,6 +23,7 @@ app.use(express.static(path.join(__dirname, 'src/pages')));
 
 app.use('/api/user', userRoutes);
 app.use('/api/books', bookRoutes);
+app.use('/api/admin', adminRoutes);
 
 app.get((req, res, next) => {
   res.sendFile(path.join(__dirname, '../frontend/src/pages/index.html'));

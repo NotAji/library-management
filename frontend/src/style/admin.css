@@ -83,13 +83,6 @@ body {
   cursor: pointer;
 }
 
-.container .contents {
-  display: flex;
-  justify-content: center;
-  gap: 50px;
-  padding-left: 200px;
-}
-
 .data1,
 .data2,
 .data3 {
@@ -102,4 +95,130 @@ body {
   margin-top: 100px;
   border-radius: 10px;
   background-color: #c7b198;
+}
+
+.tableContainer {
+  display: flex;
+  justify-content: center;
+  gap: 100px;
+  padding-left: 200px;
+  margin-top: 50px;
+}
+
+#userTable {
+  width: 30%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-family: Arial, sans-serif;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+#userTable th,
+#userTable td {
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+#userTable thead {
+  background-color: rgba(121, 77, 52, 0.767);
+  color: white;
+}
+
+#userTable tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+#userTable tbody tr:hover {
+  background-color: #f1f1f1;
+  transition: background-color 0.3s;
+}
+
+#userTable th {
+  font-weight: bold;
+}
+
+#userTable td {
+  vertical-align: middle;
+  background-color: #c7b198;
+}
+
+#bookTable {
+  width: 30%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-family: Arial, sans-serif;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+#bookTable th,
+#bookTable td {
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+#bookTable thead {
+  background-color: rgba(121, 77, 52, 0.767);
+  color: white;
+}
+
+#bookTable tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+#bookTable tbody tr:hover {
+  background-color: #f1f1f1;
+  transition: background-color 0.3s;
+}
+
+#bookTable th {
+  font-weight: bold;
+}
+
+#bookTable td {
+  vertical-align: middle;
+  background-color: #c7b198;
+}
+
+button {
+  padding: 5px;
+  border-radius: 10px;
+  border: none;
+}
+button:hover {
+  cursor: pointer;
+  color: #f1f1f1;
+  background-color: rgba(121, 77, 52, 0.767);
+}
+
+.container #booksTable {
+  display: flex;
+  justify-content: center;
+}
+
+.bookTable {
+  display: flex;
+  justify-content: center;
+  border: 1px solid red;
+}
+
+#books {
+  width: 30%;
+  border-collapse: collapse;
+  margin: 100px 0;
+  font-family: Arial, sans-serif;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+#books th,
+#books td {
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+#books thead {
+  background-color: rgba(121, 77, 52, 0.767);
+  color: white;
 }
