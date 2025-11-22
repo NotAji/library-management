@@ -83,6 +83,13 @@ body {
   cursor: pointer;
 }
 
+.container .contents {
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+  padding-left: 200px;
+}
+
 .data1,
 .data2,
 .data3 {
@@ -192,33 +199,206 @@ button:hover {
   background-color: rgba(121, 77, 52, 0.767);
 }
 
-.container #booksTable {
+.booksContainer {
   display: flex;
   justify-content: center;
-}
-
-.bookTable {
-  display: flex;
-  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
   border: 1px solid red;
 }
 
-#books {
+.addBook-btn {
+  font-family: "Poppins";
+  margin-right: 500px;
+  margin-bottom: 720px;
+  margin-left: 80px;
+  padding: 10px;
+  background-color: #c7b198;
+}
+
+#booksTable {
+  height: 50%;
   width: 30%;
+  margin-top: -700px;
+  margin-left: 200px;
   border-collapse: collapse;
-  margin: 100px 0;
   font-family: Arial, sans-serif;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-#books th,
-#books td {
+#booksTable th,
+#booksTable td {
   padding: 12px 15px;
   border: 1px solid #ddd;
   text-align: left;
 }
 
-#books thead {
+#booksTable thead {
   background-color: rgba(121, 77, 52, 0.767);
   color: white;
+}
+
+#booksTable tbody tr:hover {
+  background-color: #f1f1f1;
+  transition: background-color 0.3s;
+}
+
+#booksTable th {
+  font-weight: bold;
+}
+
+#booksTable td {
+  vertical-align: middle;
+  background-color: #c7b198;
+}
+
+button {
+  padding: 5px;
+  border-radius: 10px;
+  border: none;
+}
+button:hover {
+  cursor: pointer;
+  color: #f1f1f1;
+  background-color: rgba(121, 77, 52, 0.767);
+}
+
+/* Modal container */
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Modal box */
+.modal-content {
+  background: #c7b198;
+  height: 300px;
+  padding: 20px;
+  width: 350px;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+}
+
+.close {
+  float: right;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+#addBookForm {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+}
+
+#addBookForm #title {
+  font-size: 1.2rem;
+  padding: 15px;
+  margin-top: 30px;
+  margin-left: 20px;
+  width: 300px;
+  border: none;
+  border-radius: 10px;
+}
+
+#addBookForm #author {
+  font-size: 1.2rem;
+  padding: 15px;
+  margin-top: 10px;
+  margin-left: 20px;
+  width: 300px;
+  border: none;
+  border-radius: 10px;
+}
+
+.submit-btn {
+  margin-top: 20px;
+  width: 80px;
+  padding: 10px;
+  background-color: rgba(121, 77, 52, 0.767);
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.actions button {
+  background-color: rgba(121, 77, 52, 0.767);
+  border: none;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  padding: 4px;
+}
+
+/* MODAL OVERLAY */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.45);
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+/* MODAL BOX */
+.modal {
+  background: white;
+  padding: 25px;
+  border-radius: 8px;
+  width: 380px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.modal h2 {
+  margin-bottom: 10px;
+  font-size: 22px;
+}
+
+.modal input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+  gap: 10px;
+}
+
+.btn-cancel {
+  background: #bbb;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-save {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
 }

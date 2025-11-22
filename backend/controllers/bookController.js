@@ -92,7 +92,7 @@ export const updateBook = async (req, res) => {
 
 export const deleteBook = async (req, res) => {
   try {
-    const book = await Book.findOne({ bookId: req.params.id });
+    const book = await Book.findOne({ bookId: Number(req.params.bookId) });
     if (!book) return res.status(404).json({ message: 'Book not found' });
 
     await book.deleteOne();

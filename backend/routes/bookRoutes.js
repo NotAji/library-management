@@ -22,6 +22,6 @@ router.post('/createBook', protect, adminOnly, createBook);
 
 router.put('/updateBook/:id', protect, adminOnly, updateBook);
 
-router.delete('/deleteBook/:id', protect, adminOnly, deleteBook);
+router.delete('/deleteBook/:bookId', protect, adminOnly, deleteBook);
 
 export default router;

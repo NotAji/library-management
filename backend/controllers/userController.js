@@ -72,9 +72,9 @@ export const borrowBook = async (req, res) => {
     book.isBorrowed = true;
     user.borrowedBooks.push({
       bookId: book._id,
-      dateBorrowed: new Date(),
+      dateBorrowed: new Date().toISOString().split('T')[0],
     });
-    book.borrowedAt = new Date();
+    book.borrowedAt = new Date().toISOString().split('T')[0];
     book.borrowedBy = user.name;
 
     await book.save();

@@ -1,33 +1,10 @@
 const API_URL = "http://localhost:5000/api";
 
 document.addEventListener("DOMContentLoaded", () => {
-  loadAdminHeader();
   getDashboardData();
   getUsers();
-  getBooks();
+  getBorrowedBooks();
 });
-
-async function loadAdminHeader() {
-  const navbarContainer = document.getElementById("header");
-  const html = await fetch("/frontend/components/admin/adminHeader.html").then(
-    (res) => res.text()
-  );
-  navbarContainer.innerHTML = html;
-
-  const logoutBtn = document.querySelector("#logout-btn");
-
-  if (logoutBtn) {
-    logoutBtn.addEventListener("click", (e) => {
-      e.preventDefault();
-
-      const confirmed = window.confirm("Are you sure you want to logout?");
-      if (confirmed) {
-        localStorage.removeItem("token");
-        window.location.href = "login.html";
-      }
-    });
-  }
-}
 
 async function getDashboardData() {
   const res_users = await fetch(`${API_URL}/admin/users`, {
@@ -89,7 +66,7 @@ async function getUsers() {
   });
 }
 
-async function getBooks() {
+async function getBorrowedBooks() {
   const res = await fetch(`${API_URL}/admin/borrowedBooks`, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
