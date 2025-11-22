@@ -127,11 +127,11 @@ html , body {
 
 .borrow-container {
     display: grid;
-    justify-content: center; /* horizontal center of the grid */
-    align-content: center;   /* vertical center */
+    justify-content: center;
+    align-content: center; 
     row-gap: 80px;
     column-gap: 80px;;
-    min-height: 95vh;        /* ensures vertical centering */
+    min-height: 95vh;     
     padding: 20px;
     padding-left: 200px;
 }

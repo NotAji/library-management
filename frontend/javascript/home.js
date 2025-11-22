@@ -65,9 +65,8 @@ function displayBorrowedBooks(books) {
   const numBooks = books.length;
   const columns = Math.min(numBooks, 3);
   container.style.gridTemplateColumns = `repeat(${columns}, auto)`;
-  container.style.gap = "20px"; // static gap works now
+  container.style.gap = "20px";
 
-  // Dynamic card sizing
   let cardWidth, padding, fontSize;
   if (numBooks === 1) {
     cardWidth = 400;
