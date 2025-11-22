@@ -1,45 +1,48 @@
-import mongoose from "mongoose";
-import Counter from './counter.js'
+import mongoose from 'mongoose';
+import Counter from './counter.js';
 
-const bookSchema = new mongoose.Schema({
+const bookSchema = new mongoose.Schema(
+  {
     bookId: {
-        type: Number,
-        required: true,
-        unique: true
+      type: Number,
+      required: true,
+      unique: true,
     },
     title: {
-        type: String,
-        required: true
+      type: String,
+      required: true,
     },
     author: {
-        type: String,
-        required: true
+      type: String,
+      required: true,
     },
     isBorrowed: {
-        type: Boolean,
-        default: false
+      type: Boolean,
+      default: false,
     },
     borrowedBy: {
-        type: [String],
-        ref: "User",
-        default: []
+      type: [String],
+      ref: 'User',
+      default: [],
     },
     borrowedAt: {
-        type: Date,
-        default: null
-    }
-}, { timestamps: true });
+      type: Date,
+      default: null,
+    },
+  },
+  { timestamps: true },
+);
 
-bookSchema.pre("save", async function(next) {
-    if(!this.isNew) return next();
-    const counter = await Counter.findByIdAndUpdate(
-        { _id: "bookId" },
-        { $inc: { seq:1 } },
-        { new: true, upsert: true }
-    );
-    
-    this.bookId = counter.seq;
-    next();
-})
+bookSchema.pre('save', async function (next) {
+  if (!this.isNew) return next();
+  const counter = await Counter.findByIdAndUpdate(
+    { _id: 'bookId' },
+    { $inc: { seq: 1 } },
+    { new: true, upsert: true },
+  );
 
-export default mongoose.model("Book", bookSchema);
+  this.bookId = counter.seq;
+  next();
+});
+
+export default mongoose.model('Book', bookSchema);
