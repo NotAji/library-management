@@ -63,6 +63,8 @@ function addBook() {
 }
 
 async function getBooks() {
+  const table = document.getElementById("booksTable");
+  table.style.display = "none";
   const res = await fetch(`${API_URL}/books/getBooks`, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -110,6 +112,7 @@ async function getBooks() {
 
     tbody.appendChild(tr);
   });
+  table.style.display = "table";
 }
 
 function editBook(id) {

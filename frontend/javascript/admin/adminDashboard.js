@@ -7,6 +7,8 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 async function getDashboardData() {
+  document.getElementById("loadingDashboard").style.display = "block";
+
   const res_users = await fetch(`${API_URL}/admin/users`, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -34,12 +36,6 @@ async function getDashboardData() {
   dataUsers.innerHTML = totalUsers.length;
   dataBooks.innerHTML = totalBooks.length;
   dataBorrowed.innerHTML = totalBorrowed.length;
-  console.log(totalUsers);
-  console.log(dataUsers);
-  console.log(totalBooks);
-  console.log(dataBooks);
-  console.log(totalBorrowed);
-  console.log(dataBorrowed);
 }
 
 async function getUsers() {
@@ -64,6 +60,10 @@ async function getUsers() {
 
     tbody.appendChild(tr);
   });
+
+  document.getElementById("loadingDashboard").style.display = "none";
+  document.getElementById("dashboardContainer").style.display = "block";
+  document.getElementById("tableContainer").style.display = "flex";
 }
 
 async function getBorrowedBooks() {

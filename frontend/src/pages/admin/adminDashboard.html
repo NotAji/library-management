@@ -9,7 +9,7 @@
   <body>
     <div id="header"></div>
 
-    <div class="container">
+    <div class="container" id="dashboardContainer" style="display: none">
       <div class="contents">
         <div class="data1">
           <h3>Total Users</h3>
@@ -28,7 +28,7 @@
       </div>
     </div>
 
-    <div class="tableContainer">
+    <div class="tableContainer" id="tableContainer" style="display: none">
       <table id="userTable">
         <thead>
           <tr>
@@ -52,6 +52,7 @@
         <tbody></tbody>
       </table>
     </div>
+    <div id="loadingDashboard">Loading dashboard...</div>
 
     <script
       type="module"
