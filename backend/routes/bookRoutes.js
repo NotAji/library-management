@@ -3,6 +3,7 @@ import {
   getBook,
   getBooks,
   getUserBooks,
+  getAvailableBooks,
   createBook,
   updateBook,
   deleteBook,
@@ -13,7 +14,9 @@ const router = express.Router();
 
 router.get('/getBook/:id', protect, getBook);
 
-router.get('/getBooks', protect, getBooks);
+router.get('/available', protect, getAvailableBooks);
+
+router.get('/getBooks', protect, adminOnly, getBooks);
 
 router.post('/createBook', protect, adminOnly, createBook);
 

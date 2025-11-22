@@ -1,9 +1,9 @@
-const API_URL = "http://localhost:5000/api"
+const API_URL = "http://localhost:5000/api";
 
 async function loadBorrowedBooks() {
-    console.log("🚀 loadBorrowedBooks() triggered");
+  console.log("🚀 loadBorrowedBooks() triggered");
   const token = localStorage.getItem("token");
-   console.log("Token:", token);
+  console.log("Token:", token);
   if (!token) {
     window.location.href = "login.html";
     return;
@@ -11,7 +11,7 @@ async function loadBorrowedBooks() {
 
   try {
     const res = await fetch(`${API_URL}/user/userBooks`, {
-      headers: { "Authorization": `Bearer ${token}` }
+      headers: { Authorization: `Bearer ${token}` },
     });
 
     console.log("Status:", res.status);
@@ -21,12 +21,12 @@ async function loadBorrowedBooks() {
     console.log("API Response:", data);
 
     if (!data.borrowedBooks) {
-      document.getElementById("borrowedList").innerHTML = "<p>No borrowed books.</p>";
+      document.getElementById("borrowedList").innerHTML =
+        "<p>No borrowed books.</p>";
       return;
     }
 
     displayBorrowedBooks(data.borrowedBooks);
-
   } catch (err) {
     console.error(err);
   }
@@ -54,13 +54,19 @@ function displayBorrowedBooks(books) {
   container.style.display = "grid";
   container.style.justifyContent = "center";
 
-  container.innerHTML = books.map(book => `
+  container.innerHTML = books
+    .map(
+      (book) => `
     <div class="book-card">
       <h3 class="book-title">${book.title}</h3>
       <p class="book-author">Author: ${book.author}</p>
-      <p class="book-info">Date Borrowed: ${new Date(book.dateBorrowed).toLocaleDateString()}</p>
+      <p class="book-info">Date Borrowed: ${new Date(
+        book.dateBorrowed
+      ).toLocaleDateString()}</p>
     </div>
-  `).join("");
+  `
+    )
+    .join("");
 
   const numBooks = books.length;
   const columns = Math.min(numBooks, 3);
@@ -82,12 +88,13 @@ function displayBorrowedBooks(books) {
     fontSize = "1.2rem";
   }
 
-  document.querySelectorAll(".book-card").forEach(card => {
+  document.querySelectorAll(".book-card").forEach((card) => {
     card.style.width = `${cardWidth}px`;
     card.style.padding = `${padding}px`;
-    card.querySelectorAll("h3, p").forEach(el => el.style.fontSize = fontSize);
+    card
+      .querySelectorAll("h3, p")
+      .forEach((el) => (el.style.fontSize = fontSize));
   });
 }
-
 
 document.addEventListener("DOMContentLoaded", loadBorrowedBooks);

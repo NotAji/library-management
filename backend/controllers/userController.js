@@ -25,7 +25,9 @@ export const userRegister = async (req, res) => {
 
     console.log(req.body);
 
-    res.status(201).json({ message: 'User registered', user, token });
+    res
+      .status(201)
+      .json({ message: 'User registered', token, role: user.role });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -45,7 +47,7 @@ export const userLogin = async (req, res) => {
 
     console.log(req.body);
 
-    res.json({ message: 'Login successful', user, token });
+    res.json({ message: 'Login successful', token, role: user.role });
   } catch (error) {
     res.status(404).json({ error: error.message });
   }

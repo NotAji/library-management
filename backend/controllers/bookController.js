@@ -20,6 +20,16 @@ export const getBook = async (req, res) => {
   }
 };
 
+export const getAvailableBooks = async (req, res) => {
+  try {
+    const books = await Book.find({ isBorrowed: false });
+    if (!books) return res.status(404).json({ message: 'Books not found' });
+    res.json(books);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
 export const getUserBooks = async (req, res) => {
   try {
     const user = await User.findById(req.user.id).populate(
