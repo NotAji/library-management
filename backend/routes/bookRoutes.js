@@ -2,7 +2,6 @@ import express from 'express';
 import {
   getBook,
   getBooks,
-  getUserBooks,
   getAvailableBooks,
   createBook,
   updateBook,
