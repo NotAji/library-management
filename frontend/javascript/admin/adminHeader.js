@@ -14,7 +14,7 @@ async function loadAdminHeader() {
       const confirmed = window.confirm("Are you sure you want to logout?");
       if (confirmed) {
         localStorage.removeItem("token");
-        window.location.href = "login.html";
+        window.location.href = "/frontend/src/pages/login.html";
       }
     });
   }

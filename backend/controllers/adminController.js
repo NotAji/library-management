@@ -20,8 +20,6 @@ export const getBorrowedBooks = async (req, res) => {
 };
 
 export const isReturned = async (req, res) => {
-  const { bookID } = req.body;
-
   try {
     const book = await Book.findOne({ bookId: req.params.id });
     if (!book) return res.status(404).json({ message: 'Book not found' });
@@ -30,20 +28,23 @@ export const isReturned = async (req, res) => {
       return res.status(400).json({ message: 'Book is not borrowed' });
     }
 
-    const user = await User.FindOne(book.borrowedBy);
+    // ⬇ FIXED: borrowedBy must be an ObjectId, so use findById
+    const user = await User.findOne({ name: book.borrowedBy });
     if (!user) return res.status(404).json({ message: 'User not found' });
 
+    // remove this book from user's borrowedBooks array
     user.borrowedBooks = user.borrowedBooks.filter(
-      (bId) => bId.toString() !== book._id.toString(),
+      (b) => b.bookId.toString() !== book._id.toString(),
     );
-
     await user.save();
 
+    // reset book
     book.isBorrowed = false;
-    book.borrowedBy = null;
+    book.borrowedBy = [];
+    book.borrowedAt = null;
     await book.save();
 
-    res.json({ message: 'Book returned succesfully', book });
+    res.json({ message: 'Book returned successfully', book });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

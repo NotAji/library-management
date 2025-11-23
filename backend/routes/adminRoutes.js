@@ -1,12 +1,9 @@
 import express from 'express';
 import {
-  getBook,
-  getBooks,
-  createBook,
-  updateBook,
-  deleteBook,
-} from '../controllers/bookController.js';
-import { getUsers, getBorrowedBooks } from '../controllers/adminController.js';
+  getUsers,
+  getBorrowedBooks,
+  isReturned,
+} from '../controllers/adminController.js';
 import { adminOnly } from '../middleware/authMIddlewate.js';
 import { protect } from '../middleware/authMIddlewate.js';
 
@@ -17,5 +14,7 @@ router.use(protect, adminOnly);
 router.get('/users', getUsers);
 
 router.get('/borrowedBooks', getBorrowedBooks);
+
+router.post('/returnBook/:id', isReturned);
 
 export default router;

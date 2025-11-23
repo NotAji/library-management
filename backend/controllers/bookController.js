@@ -36,13 +36,15 @@ export const getUserBooks = async (req, res) => {
       'borrowedBooks.bookId',
     );
 
-    if (!user) return res.status(404).json({ message: 'Books not found' });
+    if (!user) return res.status(404).json({ message: 'User not found' });
 
-    const books = user.borrowedBooks.map((item) => ({
-      title: item.bookId.title,
-      author: item.bookId.author,
-      dateBorrowed: item.dateBorrowed,
-    }));
+    const books = user.borrowedBooks
+      .filter((item) => item.bookId !== null) // ⬅ prevent the crash
+      .map((item) => ({
+        title: item.bookId.title,
+        author: item.bookId.author,
+        dateBorrowed: item.dateBorrowed,
+      }));
 
     res.json({ borrowedBooks: books });
   } catch (error) {

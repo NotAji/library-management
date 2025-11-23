@@ -85,8 +85,32 @@ async function getBorrowedBooks() {
           <td>${book.title}</td>
           <td>${book.borrowedBy}</td>
           <td>${book.borrowedAt}</td>
-          <td><button>Returned</button></td>`;
+          <td><button onclick="returnBook(${book.bookId})">Returned</button></td>
+`;
 
     tbody.appendChild(tr);
   });
+}
+
+async function returnBook(bookId) {
+  try {
+    const res = await fetch(`${API_URL}/admin/returnBook/${bookId}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+
+    const data = await res.json();
+
+    if (res.ok) {
+      alert("Book returned!");
+      window.location.reload();
+    } else {
+      alert(data.error || "Failed to return book");
+    }
+  } catch (err) {
+    console.error(err);
+  }
 }

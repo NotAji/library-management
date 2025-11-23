@@ -1,5 +1,7 @@
 const API_URL = "http://localhost:5000/api";
 
+document.addEventListener("DOMContentLoaded", loadBorrowedBooks);
+
 async function loadBorrowedBooks() {
   console.log("🚀 loadBorrowedBooks() triggered");
   const token = localStorage.getItem("token");
@@ -96,5 +98,3 @@ function displayBorrowedBooks(books) {
       .forEach((el) => (el.style.fontSize = fontSize));
   });
 }
-
-document.addEventListener("DOMContentLoaded", loadBorrowedBooks);
