@@ -13,9 +13,9 @@ router.post('/register', userRegister);
 
 router.post('/login', userLogin);
 
-router.post('/borrowBook/:id', borrowBook);
+router.post('/borrowBook/:id', protect, borrowBook);
 
-router.get('/getBooks', getBooks);
+router.get('/getBooks', protect, getBooks);
 
 router.get('/userBooks', protect, getUserBooks);
 

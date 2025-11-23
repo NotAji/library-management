@@ -55,7 +55,7 @@ export const userLogin = async (req, res) => {
 
 export const borrowBook = async (req, res) => {
   try {
-    const user = await User.findOne(User.email);
+    const user = await User.findById(req.user.id);
     if (!user) return res.status(400).json({ message: 'User not found' });
 
     if (user.borrowedBooks.length >= 6) {

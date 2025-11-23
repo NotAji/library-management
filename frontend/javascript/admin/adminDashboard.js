@@ -67,29 +67,43 @@ async function getUsers() {
 }
 
 async function getBorrowedBooks() {
-  const res = await fetch(`${API_URL}/admin/borrowedBooks`, {
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem("token")}`,
-    },
-  });
+  try {
+    const res = await fetch(`${API_URL}/admin/borrowedBooks`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
 
-  const books = await res.json();
+    const data = await res.json();
+    const books = data.borrowedBooks || []; // adjust if your API returns { borrowedBooks: [...] }
 
-  const tbody = document.querySelector("#bookTable tbody");
-  tbody.innerHTML = "";
+    console.log(data);
 
-  books.forEach((book) => {
-    const tr = document.createElement("tr");
+    const tbody = document.querySelector("#bookTable tbody");
+    tbody.innerHTML = "";
 
-    tr.innerHTML = `
-          <td>${book.title}</td>
-          <td>${book.borrowedBy}</td>
-          <td>${book.borrowedAt}</td>
-          <td><button onclick="returnBook(${book.bookId})">Returned</button></td>
-`;
+    if (books.length === 0) {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td colspan="4" style="text-align: center;">No borrowed books</td>
+      `;
+      tbody.appendChild(tr);
+      return;
+    }
 
-    tbody.appendChild(tr);
-  });
+    books.forEach((book) => {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td>${book.title}</td>
+        <td>${book.borrowedBy}</td>
+        <td>${book.borrowedAt}</td>
+        <td><button onclick="returnBook(${book.bookId})">Returned</button></td>
+      `;
+      tbody.appendChild(tr);
+    });
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 async function returnBook(bookId) {

@@ -11,10 +11,10 @@ const router = express.Router();
 
 router.use(protect, adminOnly);
 
-router.get('/users', getUsers);
+router.get('/users', protect, adminOnly, getUsers);
 
-router.get('/borrowedBooks', getBorrowedBooks);
+router.get('/borrowedBooks', protect, adminOnly, getBorrowedBooks);
 
-router.post('/returnBook/:id', isReturned);
+router.post('/returnBook/:id', protect, adminOnly, isReturned);
 
 export default router;
