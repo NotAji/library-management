@@ -1,6 +1,28 @@
 const API_URL = "http://localhost:5000/api";
 
-document.addEventListener("DOMContentLoaded", loadProfile);
+const editProfileBtn = document.getElementById("editProfileBtn");
+const changePasswordBtn = document.getElementById("changePasswordBtn");
+
+const editProfileModal = document.getElementById("editProfileModal");
+const changePasswordModal = document.getElementById("changePasswordModal");
+
+const closeEditProfile = document.getElementById("closeProfileModal");
+const closePasswordModal = document.getElementById("closePasswordModal");
+
+const saveProfileBtn = document.getElementById("saveProfileBtn");
+const savePasswordBtn = document.getElementById("savePasswordBtn");
+
+const nameField = document.getElementById("profileName");
+const emailField = document.getElementById("profileEmail");
+const roleField = document.getElementById("profileRole");
+const sinceField = document.getElementById("profileCreated");
+const borrowedField = document.getElementById("borrowedCount");
+
+const editNameInput = document.getElementById("editName");
+const editEmailInput = document.getElementById("editEmail");
+
+const oldPassInput = document.getElementById("oldPassword");
+const newPassInput = document.getElementById("newPassword");
 
 async function loadProfile() {
   try {
@@ -10,31 +32,45 @@ async function loadProfile() {
       },
     });
 
-    const data = await res.json();
-    if (!res.ok) return alert(data.message);
+    const user = await res.json();
 
-    document.getElementById("profileName").textContent = data.name;
-    document.getElementById("profileEmail").textContent = data.email;
-    document.getElementById("profileRole").textContent = data.role;
-    document.getElementById("profileCreated").textContent =
-      data.createdAt.split("T")[0];
-    document.getElementById("borrowedCount").textContent =
-      data.borrowedBooks.length;
+    nameField.textContent = user.name;
+    emailField.textContent = user.email;
+    roleField.textContent = user.role || "User";
+    sinceField.textContent = user.createdAt?.split("T")[0];
+    borrowedField.textContent = `${user.borrowedBooks?.length || 0} / 6`;
   } catch (err) {
-    console.error("Profile fetch error:", err);
+    console.error("Error loading profile:", err);
   }
 }
 
-document.getElementById("editProfileBtn").onclick = () => {
-  const newName = prompt("Enter new name:");
-  const newEmail = prompt("Enter new email:");
+loadProfile();
 
-  if (!newName || !newEmail) return;
-
-  updateProfile(newName, newEmail);
+editProfileBtn.onclick = () => {
+  editProfileModal.classList.add("open");
 };
 
-async function updateProfile(name, email) {
+changePasswordBtn.onclick = () => {
+  changePasswordModal.classList.add("open");
+};
+
+closeEditProfile.onclick = () => {
+  editProfileModal.classList.remove("open");
+};
+
+closePasswordModal.onclick = () => {
+  changePasswordModal.classList.remove("open");
+};
+
+saveProfileBtn.onclick = async () => {
+  const newName = editNameInput.value.trim();
+  const newEmail = editEmailInput.value.trim();
+
+  if (!newName || !newEmail) {
+    alert("All fields are required.");
+    return;
+  }
+
   try {
     const res = await fetch(`${API_URL}/user/updateProfile`, {
       method: "PUT",
@@ -42,27 +78,32 @@ async function updateProfile(name, email) {
         "Content-Type": "application/json",
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
-      body: JSON.stringify({ name, email }),
+      body: JSON.stringify({ name: newName, email: newEmail }),
     });
 
     const data = await res.json();
 
-    if (res.ok) {
-      alert("Profile updated!");
-      loadProfile();
-    } else {
+    if (!res.ok) {
       alert(data.message);
+      return;
     }
-  } catch (error) {
-    console.error(error);
+
+    alert("Profile updated successfully!");
+    editProfileModal.classList.remove("open");
+    loadProfile();
+  } catch (err) {
+    console.error("Profile update error:", err);
   }
-}
+};
 
-document.getElementById("changePasswordBtn").onclick = async () => {
-  const current = prompt("Current password:");
-  const newPass = prompt("New password:");
+savePasswordBtn.onclick = async () => {
+  const oldPass = oldPassInput.value.trim();
+  const newPass = newPassInput.value.trim();
 
-  if (!current || !newPass) return;
+  if (!oldPass || !newPass) {
+    alert("Both fields are required.");
+    return;
+  }
 
   try {
     const res = await fetch(`${API_URL}/user/changePassword`, {
@@ -71,16 +112,24 @@ document.getElementById("changePasswordBtn").onclick = async () => {
         "Content-Type": "application/json",
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
-      body: JSON.stringify({ current, newPass }),
+      body: JSON.stringify({ oldPassword: oldPass, newPassword: newPass }),
     });
 
     const data = await res.json();
 
+    if (!res.ok) {
+      alert(data.message);
+      return;
+    }
+
     if (res.ok) {
-      alert("Password changed!");
+      alert("Password changed successfully!");
+      changePasswordModal.classList.remove("open");
+      oldPassInput.value = "";
+      newPassInput.value = "";
       window.location.href = "/frontend/src/pages/login.html";
-    } else alert(data.message);
+    }
   } catch (err) {
-    console.error(err);
+    console.error("Password change error:", err);
   }
 };

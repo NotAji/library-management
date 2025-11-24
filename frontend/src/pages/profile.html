@@ -19,13 +19,39 @@
         <div class="profile-info">
           <p>Email: <span id="profileEmail">user@example.com</span></p>
           <p>Member since: <span id="profileCreated">2023-01-01</span></p>
-          <p>Borrowed Books: <span id="BorrowedCount">3 / 6</span></p>
+          <p>Borrowed Books: <span id="borrowedCount">0</span></p>
         </div>
 
         <div class="profile-actions">
           <button id="editProfileBtn">Edit Profile</button>
           <button id="changePasswordBtn">Change Password</button>
         </div>
+      </div>
+    </div>
+
+    <div id="editProfileModal" class="side-modal">
+      <div class="modal-content">
+        <h3>Edit Profile</h3>
+
+        <input type="text" id="editName" placeholder="Name" />
+        <input type="email" id="editEmail" placeholder="Email" />
+      </div>
+      <div class="profileButtons">
+        <button id="saveProfileBtn">Save</button>
+        <button id="closeProfileModal">Close</button>
+      </div>
+    </div>
+
+    <div id="changePasswordModal" class="side-modal">
+      <div class="modal-content">
+        <h4>Change Password</h4>
+
+        <input type="password" id="oldPassword" placeholder="Old Password" />
+        <input type="password" id="newPassword" placeholder="New Password" />
+      </div>
+      <div class="passwordButtons">
+        <button id="savePasswordBtn">Update</button>
+        <button id="closePasswordModal">Close</button>
       </div>
     </div>
 

@@ -71,3 +71,109 @@ body {
   color: white;
   background-color: rgba(51, 34, 22, 0.767);
 }
+
+.side-modal {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 300px;
+  background: #c7b198;
+  box-shadow: 4px 0 10px rgba(0, 0, 0, 0.2);
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+  padding: 20px;
+  z-index: 1000;
+  gap: 20px;
+}
+
+.side-modal.open {
+  transform: translateX(0);
+}
+
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content h3 {
+  font-size: 2rem;
+}
+
+.modal-content h4 {
+  font-size: 1.5rem;
+}
+
+.modal-content #editName {
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  font-size: 1rem;
+}
+
+.modal-content #editEmail {
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  font-size: 1rem;
+}
+
+.modal-content #oldPassword {
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  font-size: 1rem;
+}
+
+.modal-content #newPassword {
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  font-size: 1rem;
+}
+
+.profileButtons {
+  display: flex;
+  gap: 20px;
+}
+
+.passwordButtons {
+  display: flex;
+  gap: 20px;
+}
+
+.profileButtons button {
+  padding: 10px;
+  cursor: pointer;
+  width: 70px;
+  border-radius: 10px;
+  border: none;
+  background-color: rgba(121, 77, 52, 0.767);
+}
+
+.passwordButtons button {
+  padding: 10px;
+  width: 70px;
+  border-radius: 10px;
+  border: none;
+  background-color: rgba(121, 77, 52, 0.767);
+}
+
+.profileButtons button:hover {
+  cursor: pointer;
+  color: white;
+  background-color: rgba(51, 34, 22, 0.767);
+}
+
+.passwordButtons button:hover {
+  cursor: pointer;
+  color: white;
+  background-color: rgba(51, 34, 22, 0.767);
+}
