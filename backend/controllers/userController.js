@@ -85,3 +85,50 @@ export const borrowBook = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+export const getProfile = async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id);
+
+    res.json({
+      name: user.name,
+      email: user.email,
+      role: user.role,
+      createdAt: user.createdAt.toISOString().split('T')[0],
+      borrowedBooks: user.borrowedBooks,
+    });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+export const updateProfile = async (req, res) => {
+  const { name, email } = req.body;
+
+  try {
+    await User.findByIdAndUpdate(req.user.id, { name, email });
+
+    res.json({ message: 'Profile updated' });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+export const changePassword = async (req, res) => {
+  const { current, newPass } = req.body;
+
+  try {
+    const user = await User.findById(req.user.id);
+
+    const isMatch = await bcrypt.compare(current, user.password);
+    if (!isMatch)
+      return res.status(400).json({ message: 'Incorrect password' });
+
+    user.password = await bcrypt.hash(newPass, 10);
+    await user.save();
+
+    res.json({ message: 'Password updated' });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};

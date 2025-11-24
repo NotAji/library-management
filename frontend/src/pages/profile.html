@@ -3,11 +3,33 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../style/profile.css" />
     <title>AjinLib - Profile</title>
   </head>
   <body>
     <div id="header"></div>
 
+    <div class="profile-container">
+      <div class="profile-wrapper">
+        <div class="profile-header">
+          <h2 id="profileName">Full Name</h2>
+          <p>Role: <span id="profileRole">User</span></p>
+        </div>
+
+        <div class="profile-info">
+          <p>Email: <span id="profileEmail">user@example.com</span></p>
+          <p>Member since: <span id="profileCreated">2023-01-01</span></p>
+          <p>Borrowed Books: <span id="BorrowedCount">3 / 6</span></p>
+        </div>
+
+        <div class="profile-actions">
+          <button id="editProfileBtn">Edit Profile</button>
+          <button id="changePasswordBtn">Change Password</button>
+        </div>
+      </div>
+    </div>
+
     <script type="module" src="/frontend/javascript/navbar.js"></script>
+    <script type="module" src="/frontend/javascript/profile.js"></script>
   </body>
 </html>

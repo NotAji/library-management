@@ -1,0 +1,73 @@
+@font-face {
+  font-family: "Poppins";
+  src: url("/frontend/assets/fonts/poppins/Poppins-Bold.ttf"),
+    url("/frontend/assets/fonts/poppins/Poppins-Black.ttf");
+  font-weight: 400;
+  font-style: normal;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  overflow-x: hidden;
+}
+
+.profile-container {
+  border: 1px solid red;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.profile-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  height: 400px;
+  background-color: #c7b198;
+  width: 500px;
+}
+
+.profile-header {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  font-size: 1.2rem;
+}
+
+.profile-info {
+  font-size: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.profile-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.profile-actions button {
+  padding: 10px;
+  font-size: 1.2rem;
+  border-radius: 10px;
+  border: none;
+  background-color: rgba(121, 77, 52, 0.767);
+  margin-bottom: 30px;
+}
+
+.profile-actions button:hover {
+  cursor: pointer;
+  color: white;
+  background-color: rgba(51, 34, 22, 0.767);
+}
