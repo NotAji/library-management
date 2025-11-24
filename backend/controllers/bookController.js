@@ -3,10 +3,23 @@ import User from '../models/userModel.js';
 
 export const getBooks = async (req, res) => {
   try {
-    const books = await Book.find();
-    res.json(books);
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 7;
+
+    const totalBooks = await Book.countDocuments();
+
+    const books = await Book.find()
+      .skip((page - 1) * limit)
+      .limit(limit);
+
+    res.json({
+      books,
+      totalPages: Math.ceil(totalBooks / limit),
+      currentPage: page,
+      totalBooks,
+    });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(500).json({ error: error.message });
   }
 };
 
@@ -22,9 +35,23 @@ export const getBook = async (req, res) => {
 
 export const getAvailableBooks = async (req, res) => {
   try {
-    const books = await Book.find({ isBorrowed: false });
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 7;
+    const skip = (page - 1) * limit;
+
+    const books = await Book.find({ isBorrowed: false })
+      .skip(skip)
+      .limit(limit)
+      .sort({ bookId: 1 });
+    const totalBooks = await Book.countDocuments({ isBorrowed: false });
     if (!books) return res.status(404).json({ message: 'Books not found' });
-    res.json(books);
+
+    res.json({
+      books,
+      totalBooks,
+      currentPage: page,
+      totalPages: Math.ceil(totalBooks / limit),
+    });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -39,7 +66,7 @@ export const getUserBooks = async (req, res) => {
     if (!user) return res.status(404).json({ message: 'User not found' });
 
     const books = user.borrowedBooks
-      .filter((item) => item.bookId !== null) // ⬅ prevent the crash
+      .filter((item) => item.bookId !== null)
       .map((item) => ({
         title: item.bookId.title,
         author: item.bookId.author,
@@ -102,5 +129,29 @@ export const deleteBook = async (req, res) => {
     res.json({ message: 'Book deleted' });
   } catch (error) {
     res.status(500).json({ message: error.message });
+  }
+};
+
+export const deleteUser = async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    if (!user) return res.status(404).json({ message: 'User not found' });
+
+    await Book.updateMany(
+      { borrowedBy: user.name },
+      {
+        $set: {
+          isBorrowed: false,
+          borrowedBy: null,
+          borrowedAt: null,
+        },
+      },
+    );
+
+    await user.deleteOne();
+
+    res.json({ message: 'User deleted successfully and books reset.' });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
   }
 };

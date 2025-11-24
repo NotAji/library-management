@@ -90,3 +90,20 @@ button:hover {
   vertical-align: middle;
   background-color: #c7b198;
 }
+
+#booksPagination {
+  padding: 10px;
+  margin-top: -10px;
+  display: flex;
+  gap: 20px;
+}
+
+#booksPagination button {
+  padding: 10px;
+  background-color: #c7b198;
+  color: black;
+}
+
+#booksPagination button:hover {
+  background-color: rgba(121, 77, 52, 0.767);
+}

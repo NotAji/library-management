@@ -62,21 +62,39 @@ function addBook() {
     });
 }
 
-async function getBooks() {
+let currentPage = 1;
+let limit = 7;
+
+async function getBooks(page = 1) {
   const table = document.getElementById("booksTable");
   table.style.display = "none";
-  const res = await fetch(`${API_URL}/books/getBooks`, {
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem("token")}`,
-    },
-  });
 
-  const books = await res.json();
+  const res = await fetch(
+    `${API_URL}/books/getBooks?page=${page}&limit=${limit}`,
+    {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    }
+  );
 
-  console.log(books);
+  const data = await res.json();
+  const books = data.books;
 
   const tbody = document.querySelector("#booksTable tbody");
   tbody.innerHTML = "";
+
+  if (!books.length) {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td colspan="7" style="text-align:center; padding:100px; font-family: 'Poppins">
+        No Books Available
+      </td>
+    `;
+    tbody.appendChild(tr);
+    table.style.display = "table";
+    return;
+  }
 
   books.forEach((book) => {
     const tr = document.createElement("tr");
@@ -113,11 +131,55 @@ async function getBooks() {
     tbody.appendChild(tr);
   });
   table.style.display = "table";
+
+  setupPagination(data.currentPage, data.totalPages);
+}
+
+function setupPagination(currentPage, totalPages) {
+  const pageInfo = document.getElementById("pageNumbers");
+  const prevBtn = document.getElementById("prevPage");
+  const nextBtn = document.getElementById("nextPage");
+
+  prevBtn.disabled = currentPage === 1;
+  nextBtn.disabled = currentPage === totalPages;
+
+  pageInfo.innerHTML = "";
+
+  for (let i = 1; i <= totalPages; i++) {
+    const btn = document.createElement("button");
+    btn.textContent = i;
+    btn.classList.add("page-btn");
+
+    if (i === currentPage) {
+      btn.disabled = true;
+      btn.style.fontWeight = "bold";
+    }
+
+    btn.addEventListener("click", () => {
+      currentPage = i;
+      getBooks(currentPage);
+    });
+
+    pageInfo.appendChild(btn);
+  }
+
+  prevBtn.onclick = () => {
+    if (currentPage > 1) {
+      currentPage--;
+      getBooks(currentPage);
+    }
+  };
+
+  nextBtn.onclick = () => {
+    if (currentPage < totalPages) {
+      currentPage++;
+      getBooks(currentPage);
+    }
+  };
 }
 
 function editBook(id) {
   console.log("Edit book:", id);
-  // open modal, fill form, etc.
 }
 
 async function deleteBook(id) {

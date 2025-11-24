@@ -3,8 +3,14 @@ import User from '../models/userModel.js';
 
 export const getUsers = async (req, res) => {
   try {
-    const users = await User.find({ role: 'user' });
-    res.json(users);
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 5;
+    const skip = (page - 1) * limit;
+
+    const totalUsers = await User.countDocuments();
+
+    const users = await User.find({ role: 'user' }).skip(skip).limit(limit);
+    res.json({ users, totalUsers });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -12,8 +18,16 @@ export const getUsers = async (req, res) => {
 
 export const getBorrowedBooks = async (req, res) => {
   try {
-    const borrowedBooks = await Book.find({ isBorrowed: true });
-    res.json(borrowedBooks);
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 5;
+    const skip = (page - 1) * limit;
+
+    const borrowedBooks = await Book.find({ isBorrowed: true })
+      .skip(skip)
+      .limit(limit);
+
+    const totalBorrowed = await Book.countDocuments({ isBorrowed: true });
+    res.json({ borrowedBooks, totalBorrowed });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -28,17 +42,14 @@ export const isReturned = async (req, res) => {
       return res.status(400).json({ message: 'Book is not borrowed' });
     }
 
-    // ⬇ FIXED: borrowedBy must be an ObjectId, so use findById
     const user = await User.findOne({ name: book.borrowedBy });
     if (!user) return res.status(404).json({ message: 'User not found' });
 
-    // remove this book from user's borrowedBooks array
     user.borrowedBooks = user.borrowedBooks.filter(
       (b) => b.bookId.toString() !== book._id.toString(),
     );
     await user.save();
 
-    // reset book
     book.isBorrowed = false;
     book.borrowedBy = [];
     book.borrowedAt = null;

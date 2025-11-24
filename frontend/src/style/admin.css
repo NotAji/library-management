@@ -119,7 +119,7 @@ body {
 
 #userTable th,
 #userTable td {
-  padding: 12px 15px;
+  padding: 20px 15px;
   border: 1px solid #ddd;
   text-align: left;
 }
@@ -202,7 +202,6 @@ button:hover {
   align-items: center;
   height: 100vh;
   flex-direction: column;
-  border: 1px solid red;
 }
 
 .addBook-btn {
@@ -215,7 +214,7 @@ button:hover {
 }
 
 #booksTable {
-  height: 50%;
+  height: 10%;
   width: 30%;
   margin-top: -700px;
   margin-left: 200px;
@@ -261,20 +260,18 @@ button:hover {
   background-color: rgba(121, 77, 52, 0.767);
 }
 
-/* Modal container */
 .modal {
   display: none;
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.6);
+  background-color: #c7b198;
   justify-content: center;
   align-items: center;
   z-index: 1000;
 }
 
-/* Modal box */
 .modal-content {
-  background: #c7b198;
+  background-color: #c7b198;
   height: 300px;
   padding: 20px;
   width: 350px;
@@ -339,7 +336,6 @@ button:hover {
   padding: 4px;
 }
 
-/* MODAL OVERLAY */
 .modal-overlay {
   display: none;
   position: fixed;
@@ -353,15 +349,14 @@ button:hover {
   z-index: 9999;
 }
 
-/* MODAL BOX */
 .modal {
-  background: white;
+  background: #c7b198;
   padding: 25px;
   border-radius: 8px;
   width: 380px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 20px;
 }
 
 .modal h2 {
@@ -374,6 +369,7 @@ button:hover {
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 5px;
+  margin-bottom: 20px;
 }
 
 .modal-actions {
@@ -384,7 +380,7 @@ button:hover {
 }
 
 .btn-cancel {
-  background: #bbb;
+  background: whitesmoke;
   border: none;
   padding: 8px 12px;
   border-radius: 5px;
@@ -392,10 +388,86 @@ button:hover {
 }
 
 .btn-save {
-  background: #007bff;
+  background: rgba(121, 77, 52, 0.767);
   color: white;
   border: none;
   padding: 8px 12px;
   border-radius: 5px;
   cursor: pointer;
+}
+.btn-save:hover {
+  background-color: rgba(68, 47, 35, 0.767);
+}
+
+#pagination {
+  margin-left: 200px;
+  margin-top: 10px;
+  display: flex;
+  gap: 20px;
+}
+
+#pageNumbers {
+  display: flex;
+  gap: 10px;
+}
+
+.page-btn {
+  padding: 10px;
+  background-color: #c7b198;
+}
+
+#prevPage {
+  padding: 10px;
+  background-color: #c7b198;
+}
+
+#nextPage {
+  padding: 10px;
+  background-color: #c7b198;
+}
+
+#prevPage:hover {
+  background-color: rgba(68, 47, 35, 0.767);
+}
+
+#nextPage:hover {
+  background-color: rgba(68, 47, 35, 0.767);
+}
+
+.userTableWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.bookTableWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#usersPagination {
+  display: flex;
+  gap: 20px;
+}
+#usersPagination button {
+  padding: 10px;
+  background-color: #c7b198;
+}
+
+#booksPagination {
+  display: flex;
+  gap: 20px;
+}
+#booksPagination button {
+  padding: 10px;
+  background-color: #c7b198;
+}
+
+#usersPagination button:hover {
+  background-color: rgba(68, 47, 35, 0.767);
+}
+
+#booksPagination button:hover {
+  background-color: rgba(68, 47, 35, 0.767);
 }
