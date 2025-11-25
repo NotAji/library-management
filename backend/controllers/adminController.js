@@ -43,17 +43,14 @@ export const isReturned = async (req, res) => {
       return res.status(400).json({ message: 'Book is not borrowed' });
     }
 
-    // Use ObjectId reference stored in borrowedBy
     const user = await User.findById(book.borrowedBy);
     if (user) {
-      // Remove the book from the user's borrowedBooks array
       user.borrowedBooks = user.borrowedBooks.filter(
         (b) => b.bookId.toString() !== book._id.toString(),
       );
       await user.save();
     }
 
-    // Reset the book
     book.isBorrowed = false;
     book.borrowedBy = null;
     book.borrowedAt = null;

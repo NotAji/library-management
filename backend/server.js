@@ -26,7 +26,7 @@ app.use('/api/books', bookRoutes);
 app.use('/api/admin', adminRoutes);
 
 app.get((req, res, next) => {
-  res.sendFile(path.join(__dirname, '../frontend/src/pages/index.html'));
+  res.sendFile(path.join(__dirname, '../frontend/src/pages/login.html'));
 });
 
 app.listen(PORT, () => {

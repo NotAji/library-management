@@ -1,6 +1,5 @@
 const API_URL = "http://localhost:5000/api/user";
 
-// REGISTER
 if (document.querySelector(".register-form")) {
   document
     .querySelector(".register-form")
@@ -34,7 +33,6 @@ if (document.querySelector(".register-form")) {
     });
 }
 
-// LOGIN
 if (document.querySelector(".loginForm")) {
   document.querySelector(".loginForm").addEventListener("submit", async (e) => {
     e.preventDefault();

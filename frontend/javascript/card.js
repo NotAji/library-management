@@ -1,11 +1,9 @@
-
-
 async function loadCard() {
   const navbarContainer = document.getElementById("bookGrid");
   if (!navbarContainer) return console.error("Element #book-card not found");
 
   try {
-    const res = await fetch("/frontend/components/card.html"); // relative path to HTML page
+    const res = await fetch("/frontend/components/card.html");
     if (!res.ok) throw new Error("Failed to fetch card.html");
     const html = await res.text();
     navbarContainer.innerHTML = html;
