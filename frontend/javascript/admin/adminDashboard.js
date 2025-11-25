@@ -25,23 +25,23 @@ async function getDashboardData() {
     },
   });
 
-  const totalUsers = await res_users.json();
-  const totalBooksData = await res_books.json();
-  const totalBorrowed = await res_borrowed.json();
-
   const dataUsers = document.querySelector("#dataUsers");
   const dataBooks = document.querySelector("#dataBooks");
   const dataBorrowed = document.querySelector("#dataBorrowed");
 
-  dataUsers.innerHTML = Array.isArray(totalUsers)
-    ? totalUsers.length
-    : totalUsers.users?.length || 0;
+  const totalUsers = await res_users.json();
+  const totalBooksData = await res_books.json();
+  const totalBorrowed = await res_borrowed.json();
+
+  console.log(totalUsers);
+
+  dataUsers.innerHTML = totalUsers.totalUsers;
 
   dataBooks.innerHTML = totalBooksData.totalBooks ?? 0;
 
-  dataBorrowed.innerHTML = Array.isArray(totalBorrowed)
-    ? totalBorrowed.length
-    : totalBorrowed.borrowedBooks?.length || 0;
+  dataBorrowed.innerHTML = totalBorrowed.totalBorrowed;
+
+  console.log(totalBorrowed.totalBorrowed);
 }
 
 async function getUsers(page = 1) {
@@ -174,9 +174,11 @@ async function getBorrowedBooks(page = 1) {
         const tr = document.createElement("tr");
         tr.innerHTML = `
           <td>${book.title}</td>
-          <td>${book.borrowedBy}</td>
+          <td>${book.borrowedBy ? book.borrowedBy.name : ""}</td>
           <td>${book.borrowedAt}</td>
-          <td><button onclick="returnBook(${book.bookId})">Returned</button></td>
+          <td><button onclick="returnBook(${
+            book.bookId
+          })">Returned</button></td>
         `;
         tbody.appendChild(tr);
       });
@@ -229,6 +231,8 @@ async function returnBook(bookId) {
     });
 
     const data = await res.json();
+
+    console.log(data);
 
     if (res.ok) {
       alert("Book returned!");

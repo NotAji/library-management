@@ -25,7 +25,6 @@ function addBook() {
     if (e.target === addBookModal) addBookModal.style.display = "none";
   });
 
-  // SUBMIT FORM (connect to your backend)
   document
     .getElementById("addBookForm")
     .addEventListener("submit", async (e) => {
@@ -105,7 +104,7 @@ async function getBooks(page = 1) {
           <td>${book.author}</td>
           <td>${book.createdAt}</td>
           <td>${book.isBorrowed}</td>
-          <td>${book.borrowedBy}</td>
+          <td>${book.borrowedBy ? book.borrowedBy.name : ""}</td>
           <td class="actions">
     <button class="edit-btn">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="20" height="20">
@@ -205,8 +204,11 @@ function openEditModal(book) {
   document.getElementById("editCreatedAt").value = new Date(
     book.createdAt
   ).toLocaleString();
-  document.getElementById("editIsBorrowed").value = book.isBorrowed;
-  document.getElementById("editBorrowedBy").value = book.borrowedBy || "None";
+  document.getElementById("editIsBorrowed").value = book.isBorrowed
+    ? "Yes"
+    : "No";
+  document.getElementById("editBorrowedBy").value =
+    book.borrowedBy?.name || "None";
 
   document.getElementById("editModal").style.display = "flex";
 }
@@ -216,12 +218,12 @@ document.getElementById("closeModalBtn").addEventListener("click", () => {
 });
 
 async function submitEditBookForm() {
+  const bookId = Number(document.getElementById("editBookId").value);
+  console.log(bookId);
   const updatedBook = {
     title: document.getElementById("editTitle").value,
     author: document.getElementById("editAuthor").value,
   };
-
-  const bookId = document.getElementById("editBookId").value;
 
   try {
     const res = await fetch(`${API_URL}/books/updateBook/${bookId}`, {
@@ -235,7 +237,6 @@ async function submitEditBookForm() {
 
     const data = await res.json();
     alert(data.message);
-
     document.getElementById("editModal").style.display = "none";
     getBooks(); // reload table
   } catch (error) {
@@ -244,7 +245,6 @@ async function submitEditBookForm() {
   }
 }
 
-// Attach the function to the form submit
 document.getElementById("editBookForm").addEventListener("submit", (e) => {
   e.preventDefault();
   submitEditBookForm();

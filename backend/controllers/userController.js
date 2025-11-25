@@ -75,12 +75,16 @@ export const borrowBook = async (req, res) => {
       dateBorrowed: new Date().toISOString().split('T')[0],
     });
     book.borrowedAt = new Date().toISOString().split('T')[0];
-    book.borrowedBy = user.name;
+    book.borrowedBy = user._id;
 
     await book.save();
     await user.save();
 
-    res.json({ message: 'Book borrowed successfully' });
+    res.json({
+      message: 'Book borrowed successfully',
+      title: book.title,
+      bookId: book.bookId,
+    });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

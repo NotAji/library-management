@@ -9,6 +9,7 @@ export const getBooks = async (req, res) => {
     const totalBooks = await Book.countDocuments();
 
     const books = await Book.find()
+      .populate('borrowedBy', 'name')
       .skip((page - 1) * limit)
       .limit(limit);
 
@@ -83,8 +84,8 @@ export const createBook = async (req, res) => {
   const { title, author } = req.body;
 
   try {
-    if (!title) return res.status(400).json({ message: 'title required' });
-    if (!author) return res.status(400).json({ message: 'author required' });
+    if (!title) return res.status(400).json({ message: 'Title is required' });
+    if (!author) return res.status(400).json({ message: 'Author is required' });
 
     const lastBook = await Book.findOne().sort({ bookId: -1 });
     const bookId = lastBook ? lastBook.bookId + 1 : 1;
@@ -93,27 +94,31 @@ export const createBook = async (req, res) => {
       bookId,
       title,
       author,
+      isBorrowed: false,
+      borrowedBy: null,
+      borrowedAt: null,
     });
 
-    res.status(201).json({ message: 'Book Created', book: newBook });
+    res.status(201).json({ message: 'Book created', book: newBook });
   } catch (error) {
+    console.error('Create Book Error:', error);
     res.status(500).json({ message: error.message });
   }
 };
 
 export const updateBook = async (req, res) => {
   const { title, author } = req.body;
+  const bookId = Number(req.params.id);
 
   try {
-    const book = await Book.findOne({ bookId: req.params.id });
-
+    const book = await Book.findOne({ bookId });
     if (!book) return res.status(404).json({ message: 'Book not found' });
 
-    if (title) book.title = title;
-    if (author) book.author = author;
+    book.title = title || book.title;
+    book.author = author || book.author;
 
     await book.save();
-    res.json({ message: 'Book updated', book: book });
+    res.json({ message: 'Book updated successfully', book });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -123,6 +128,11 @@ export const deleteBook = async (req, res) => {
   try {
     const book = await Book.findOne({ bookId: Number(req.params.bookId) });
     if (!book) return res.status(404).json({ message: 'Book not found' });
+
+    await User.updateMany(
+      { 'borrowedBooks.bookId': book._id },
+      { $pull: { borrowedBooks: { bookId: book._id } } },
+    );
 
     await book.deleteOne();
 
@@ -138,7 +148,7 @@ export const deleteUser = async (req, res) => {
     if (!user) return res.status(404).json({ message: 'User not found' });
 
     await Book.updateMany(
-      { borrowedBy: user.name },
+      { borrowedBy: user._id },
       {
         $set: {
           isBorrowed: false,
@@ -150,7 +160,7 @@ export const deleteUser = async (req, res) => {
 
     await user.deleteOne();
 
-    res.json({ message: 'User deleted successfully and books reset.' });
+    res.json({ message: 'User deleted and book statuses reset.' });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

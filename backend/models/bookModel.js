@@ -21,9 +21,9 @@ const bookSchema = new mongoose.Schema(
       default: false,
     },
     borrowedBy: {
-      type: [String],
+      type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
-      default: [],
+      default: null,
     },
     borrowedAt: {
       type: Date,
