@@ -1,7 +1,7 @@
 @font-face {
   font-family: "Poppins";
-  src: url("/frontend/assets/fonts/poppins/Poppins-Bold.ttf"),
-    url("/frontend/assets/fonts/poppins/Poppins-Black.ttf");
+  src: url("../assets/fonts/poppins/Poppins-Bold.ttf"),
+    url("../assets/fonts/poppins/Poppins-Black.ttf");
   font-weight: 400;
   font-style: normal;
 }

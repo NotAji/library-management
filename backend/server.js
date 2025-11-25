@@ -15,21 +15,22 @@ const app = express();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const PORT = process.env.PORT;
-
 app.use(express.json());
 app.use(cors());
-app.use(express.static(path.join(__dirname, 'src/pages')));
+
+app.use(express.static(path.join(__dirname, '../frontend/src/pages')));
 
 app.use('/api/user', userRoutes);
 app.use('/api/books', bookRoutes);
 app.use('/api/admin', adminRoutes);
 
-app.get((req, res, next) => {
+app.get(/^\/(?!api).*$/, (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/src/pages/login.html'));
 });
 
+const PORT = process.env.PORT;
+
 app.listen(PORT, () => {
-  console.log(`server listening on port ${PORT}`);
+  console.log(`server running on port ${PORT}`);
   console.log('Awaiting database connection...');
 });

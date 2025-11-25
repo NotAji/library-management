@@ -1,7 +1,7 @@
 @font-face {
   font-family: "Poppins";
-  src: url("/frontend/assets/fonts/poppins/Poppins-Bold.ttf"),
-    url("/frontend/assets/fonts/poppins/Poppins-Black.ttf");
+  src: url("../assets/fonts/poppins/Poppins-Bold.ttf"),
+    url("../assets/fonts/poppins/Poppins-Black.ttf");
   font-weight: 400;
   font-style: normal;
 }
@@ -46,28 +46,35 @@ body {
   color: rgba(121, 77, 52, 0.767);
 }
 
-.loginForm {
+.register-form {
   display: flex;
   flex-direction: column;
   gap: 1rem;
   align-items: center;
 }
 
-.loginForm #email {
+.register-form #name {
   font-size: 1.5rem;
   padding: 15px 30px;
   border-radius: 10px;
   border: 2px solid rgba(121, 77, 52, 0.767);
 }
 
-.loginForm #password {
+.register-form #email {
   font-size: 1.5rem;
   padding: 15px 30px;
   border-radius: 10px;
   border: 2px solid rgba(121, 77, 52, 0.767);
 }
 
-.loginForm button {
+.register-form #password {
+  font-size: 1.5rem;
+  padding: 15px 30px;
+  border-radius: 10px;
+  border: 2px solid rgba(121, 77, 52, 0.767);
+}
+
+.register-form button {
   padding: 10px 20px;
   border-radius: 10px;
   border: 1px solid rgba(121, 77, 52, 0.767);
@@ -79,7 +86,7 @@ body {
   transition: transform 0.2s ease;
 }
 
-.loginForm button:hover {
+.register-form button:hover {
   cursor: pointer;
   color: white;
   transition: 0.1s;
