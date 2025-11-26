@@ -1,0 +1,472 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  font-family: sans-serif;
+}
+
+.sidebar {
+  width: 220px;
+  background-color: #c7b198;
+  color: white;
+  height: 100vh;
+  font-family: "Poppins";
+  padding: 1rem;
+  position: fixed;
+}
+
+.sidebar h2 {
+  margin-top: 3rem;
+  font-size: 2.5rem;
+  text-align: center;
+  color: rgba(121, 77, 52, 0.767);
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sidebar ul li {
+  margin: 2rem 0;
+  font-weight: bold;
+}
+
+.sidebar ul li a {
+  color: white;
+  text-decoration: none;
+  display: block;
+  font-size: 1.5rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  background: none;
+  text-align: left;
+  width: 100%;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.sidebar button {
+  font-size: 1.5rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 10px;
+  font-family: "Poppins";
+  font-weight: bold;
+  background: none;
+  color: white;
+}
+
+.sidebar ul li a:hover,
+#logout-btn:hover {
+  background-color: rgba(121, 77, 52, 0.767);
+  border-radius: 10px;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.container .contents {
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+  padding-left: 200px;
+}
+
+.data1,
+.data2,
+.data3 {
+  width: 400px;
+  height: 150px;
+  font-size: 2rem;
+  font-family: "Poppins";
+  font-weight: bold;
+  border-left: 6px solid rgba(121, 77, 52, 0.767);
+  padding: 20px;
+  text-align: center;
+  margin-top: 100px;
+  border-radius: 10px;
+  background-color: #c7b198;
+}
+
+.tableContainer {
+  display: flex;
+  justify-content: center;
+  gap: 100px;
+  padding-left: 200px;
+  margin-top: 50px;
+}
+
+#userTable {
+  width: 30%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-family: Arial, sans-serif;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+#userTable th,
+#userTable td {
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+#userTable thead {
+  background-color: rgba(121, 77, 52, 0.767);
+  color: white;
+}
+
+#userTable tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+#userTable tbody tr:hover {
+  background-color: #f1f1f1;
+  transition: background-color 0.3s;
+}
+
+#userTable th {
+  font-weight: bold;
+}
+
+#userTable td {
+  vertical-align: middle;
+  background-color: #c7b198;
+}
+
+#bookTable {
+  width: 30%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-family: Arial, sans-serif;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+#bookTable th,
+#bookTable td {
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+#bookTable thead {
+  background-color: rgba(121, 77, 52, 0.767);
+  color: white;
+}
+
+#bookTable tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+#bookTable tbody tr:hover {
+  background-color: #f1f1f1;
+  transition: background-color 0.3s;
+}
+
+#bookTable th {
+  font-weight: bold;
+}
+
+#bookTable td {
+  vertical-align: middle;
+  background-color: #c7b198;
+}
+
+button {
+  padding: 5px;
+  border-radius: 10px;
+  border: none;
+}
+button:hover {
+  cursor: pointer;
+  color: #f1f1f1;
+  background-color: rgba(121, 77, 52, 0.767);
+}
+
+.booksContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
+}
+
+.addBook-btn {
+  font-family: "Poppins";
+  font-weight: bold;
+  margin-right: 540px;
+  margin-bottom: 720px;
+  margin-left: 80px;
+  padding: 10px;
+  background-color: #c7b198;
+}
+
+#booksTable {
+  height: 10%;
+  width: 30%;
+  margin-top: -700px;
+  margin-left: 200px;
+  border-collapse: collapse;
+  font-family: Arial, sans-serif;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+#booksTable th,
+#booksTable td {
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+#booksTable thead {
+  background-color: rgba(121, 77, 52, 0.767);
+  color: white;
+}
+
+#booksTable tbody tr:hover {
+  background-color: #f1f1f1;
+  transition: background-color 0.3s;
+}
+
+#booksTable th {
+  font-weight: bold;
+}
+
+#booksTable td {
+  vertical-align: middle;
+  background-color: #c7b198;
+}
+
+button {
+  padding: 5px;
+  border-radius: 10px;
+  border: none;
+}
+button:hover {
+  cursor: pointer;
+  color: #f1f1f1;
+  background-color: rgba(121, 77, 52, 0.767);
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background-color: #c7b198;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: #c7b198;
+  height: 300px;
+  padding: 20px;
+  width: 350px;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+}
+
+.close {
+  float: right;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+#addBookForm {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+}
+
+#addBookForm #title {
+  font-size: 1.2rem;
+  padding: 15px;
+  margin-top: 30px;
+  margin-left: 20px;
+  width: 300px;
+  border: none;
+  border-radius: 10px;
+}
+
+#addBookForm #author {
+  font-size: 1.2rem;
+  padding: 15px;
+  margin-top: 10px;
+  margin-left: 20px;
+  width: 300px;
+  border: none;
+  border-radius: 10px;
+}
+
+.submit-btn {
+  margin-top: 20px;
+  width: 80px;
+  padding: 10px;
+  background-color: rgba(121, 77, 52, 0.767);
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.actions button {
+  background-color: rgba(121, 77, 52, 0.767);
+  border: none;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.45);
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.modal {
+  background: #c7b198;
+  padding: 25px;
+  border-radius: 8px;
+  width: 380px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.modal h2 {
+  margin-bottom: 10px;
+  font-size: 22px;
+}
+
+.modal input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+  gap: 10px;
+}
+
+.btn-cancel {
+  background: whitesmoke;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-save {
+  background: rgba(121, 77, 52, 0.767);
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.btn-save:hover {
+  background-color: rgba(68, 47, 35, 0.767);
+}
+
+#pagination {
+  margin-left: 200px;
+  margin-top: 10px;
+  display: flex;
+  gap: 20px;
+}
+
+#pageNumbers {
+  display: flex;
+  gap: 10px;
+}
+
+.page-btn {
+  padding: 10px;
+  background-color: #c7b198;
+}
+
+#prevPage {
+  padding: 10px;
+  background-color: #c7b198;
+}
+
+#nextPage {
+  padding: 10px;
+  background-color: #c7b198;
+}
+
+#prevPage:hover {
+  background-color: rgba(68, 47, 35, 0.767);
+}
+
+#nextPage:hover {
+  background-color: rgba(68, 47, 35, 0.767);
+}
+
+.userTableWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.bookTableWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#usersPagination {
+  display: flex;
+  gap: 20px;
+}
+#usersPagination button {
+  padding: 10px;
+  background-color: #c7b198;
+}
+
+#booksPagination {
+  display: flex;
+  gap: 20px;
+}
+#booksPagination button {
+  padding: 10px;
+  background-color: #c7b198;
+}
+
+#usersPagination button:hover {
+  background-color: rgba(68, 47, 35, 0.767);
+}
+
+#booksPagination button:hover {
+  background-color: rgba(68, 47, 35, 0.767);
+}

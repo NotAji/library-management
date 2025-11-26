@@ -22,30 +22,4 @@ Database: MongoDB (Atlas)
 
 Frontend: HTML, CSS, JavaScript
 
-Dev Tools: Nodemon, dotenv
-
-# Installation
-
-1. Clone the repository:
-
-   git clone https://github.com/yourusername/library-management.git
-
-   cd library-management
-
-2. Install dependencies:
-
-   npm install
-
-3. Create a .env file in the root folder:
-
-   MONGO_URI=your_mongodb_atlas_uri
-
-   PORT=3000
-
-4. Run the app locally:
-
-   npm run dev # development mode with nodemon
-
-   npm start # production mode
-
-5. Open your browser at: http://localhost:5000
+Dev Tools: Nodemon, dotenv, jwt, bcrypt

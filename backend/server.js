@@ -7,30 +7,34 @@ import adminRoutes from './routes/adminRoutes.js';
 import path from 'path';
 import cors from 'cors';
 import { fileURLToPath } from 'url';
+import helmet from 'helmet';
 
 dotenv.config();
 connectDB();
-const app = express();
 
+const app = express();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 app.use(express.json());
 app.use(cors());
 
-app.use(express.static(path.join(__dirname, '../frontend/src/pages')));
+// Serve frontend pages as static
+app.use(express.static(path.join(__dirname, '../frontend/public')));
 
+app.use(helmet());
+
+// API routes
 app.use('/api/user', userRoutes);
 app.use('/api/books', bookRoutes);
 app.use('/api/admin', adminRoutes);
 
-app.get(/^\/(?!api).*$/, (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/src/pages/login.html'));
+// Root route → login.html
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/public/register.html'));
 });
 
-const PORT = process.env.PORT;
-
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-  console.log(`server running on port ${PORT}`);
-  console.log('Awaiting database connection...');
+  console.log(`Server running on port ${PORT}`);
 });

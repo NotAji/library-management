@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style/admin.css" />
+    <title>AjinLib -Admin Dashboard</title>
+  </head>
+  <body>
+    <div id="header"></div>
+
+    <div class="container" id="dashboardContainer" style="display: none">
+      <div class="contents">
+        <div class="data1">
+          <h3>Total Users</h3>
+          <p id="dataUsers">0</p>
+        </div>
+
+        <div class="data2">
+          <h3>Total Books</h3>
+          <p id="dataBooks">0</p>
+        </div>
+
+        <div class="data3">
+          <h3>Borrowed Books</h3>
+          <p id="dataBorrowed">0</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="tableContainer" id="tableContainer" style="display: none">
+      <div class="userTableWrapper">
+        <table id="userTable">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Borrowed Books</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+        <div id="usersPagination"></div>
+      </div>
+      <div class="bookTableWrapper">
+        <table id="bookTable">
+          <thead>
+            <tr>
+              <th>Book</th>
+              <th>Borrowed By</th>
+              <th>Date Borrowed</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+        <div id="booksPagination"></div>
+      </div>
+    </div>
+
+    <div id="loadingDashboard">Loading dashboard...</div>
+
+    <script src="javascript/adminDashboard.js"></script>
+    <script type="module" src="javascript/adminHeader.js"></script>
+  </body>
+</html>

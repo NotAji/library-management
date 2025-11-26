@@ -1,0 +1,111 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap");
+
+#bookTable {
+  width: 30%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-family: "Poppins", sans-serif;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+#bookTable th,
+#bookTable td {
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+#bookTable thead {
+  background-color: rgba(121, 77, 52, 0.767);
+  color: white;
+}
+
+#bookTable tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+#bookTable tbody tr:hover {
+  background-color: #f1f1f1;
+  transition: background-color 0.3s;
+}
+
+#bookTable th {
+  font-weight: bold;
+}
+
+#bookTable td {
+  vertical-align: middle;
+  background-color: #c7b198;
+}
+
+button {
+  padding: 5px;
+  border-radius: 10px;
+  border: none;
+}
+button:hover {
+  cursor: pointer;
+  color: #f1f1f1;
+  background-color: rgba(121, 77, 52, 0.767);
+}
+
+.booksContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
+}
+
+#booksTable {
+  height: 50%;
+  width: 30%;
+  margin-top: -700px;
+  margin-left: 200px;
+  border-collapse: collapse;
+  font-family: "Poppins", sans-serif;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+#booksTable th,
+#booksTable td {
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+#booksTable thead {
+  background-color: rgba(121, 77, 52, 0.767);
+  color: white;
+}
+
+#booksTable tbody tr:hover {
+  background-color: #f1f1f1;
+  transition: background-color 0.3s;
+}
+
+#booksTable th {
+  font-weight: bold;
+}
+
+#booksTable td {
+  vertical-align: middle;
+  background-color: #c7b198;
+}
+
+#booksPagination {
+  padding: 10px;
+  margin-top: -10px;
+  display: flex;
+  gap: 20px;
+}
+
+#booksPagination button {
+  padding: 10px;
+  background-color: #c7b198;
+  color: black;
+}
+
+#booksPagination button:hover {
+  background-color: rgba(121, 77, 52, 0.767);
+}
