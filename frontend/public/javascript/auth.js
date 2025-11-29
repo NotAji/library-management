@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:5000/api/user";
+const API_URL = "https://ajinlib.onrender.com/api/user";
 
 if (document.querySelector(".register-form")) {
   document

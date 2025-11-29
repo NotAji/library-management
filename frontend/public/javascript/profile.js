@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:5000/api";
+const API_URL = "https://ajinlib.onrender.com/api";
 
 const editProfileBtn = document.getElementById("editProfileBtn");
 const changePasswordBtn = document.getElementById("changePasswordBtn");
